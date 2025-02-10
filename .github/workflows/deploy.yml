@@ -1,0 +1,30 @@
+name: "Deploy to EC2"
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: "Setup Python"
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: "Checkout repository"
+        uses: actions/checkout@v2
+
+      - name: "Take Latest Pull"
+        run: |
+          git pull origin main
+
+      - name: "Install dependencies"
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: "Restart FastAPI Server"
+        run: |
+          pkill -f "uvicorn" || true  # Kill existing process if running
+          nohup uvicorn app:app --host 0.0.0.0 --port 8000 --reload > server.log 2>&1 &
