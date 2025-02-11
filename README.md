@@ -139,3 +139,10 @@ docker run -d --restart always -p 8000:8000 mydockerhubusername/my-fastapi-app:v
 ---
 
 Now, your FastAPI app is running as a **Docker container** on an **EC2 instance**! 🚀
+
+
+
+### Build and Push Image
+```
+docker buildx build --platform linux/amd64,linux/arm64 -t gaurav98094/myfastapiapp:latest --push .
+```
