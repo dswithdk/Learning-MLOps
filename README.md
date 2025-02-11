@@ -146,3 +146,30 @@ Now, your FastAPI app is running as a **Docker container** on an **EC2 instance*
 ```
 docker buildx build --platform linux/amd64,linux/arm64 -t gaurav98094/myfastapiapp:latest --push .
 ```
+
+
+# User Data
+```
+#!/bin/bash
+# Update system packages
+yum update -y
+
+# Install Docker
+yum install -y docker
+
+# Start Docker service
+systemctl start docker
+systemctl enable docker
+
+# Add EC2 user to Docker group (optional)
+usermod -aG docker ec2-user
+
+# Pull a Docker image (replace 'your-image' with actual image name)
+docker pull gaurav98094/myfastapiapp:latest
+
+# Run the container (modify ports & parameters as needed)
+docker run -d -p 8000:8000 gaurav98094/myfastapiapp:latest
+
+# Log setup completion
+echo "Docker container setup complete" > /var/log/user-data.log
+```
