@@ -7,6 +7,7 @@ on:
     pull_request:
         branches:
         - main
+    workflow_dispatch:
 jobs:
     on-push:
         if: github.event_name == 'push'
@@ -21,3 +22,9 @@ jobs:
         steps:
             - name: "Step2"
               run: echo "This is Step 2"
+    on-dispath:
+        if: github.event_name == 'workflow_dispatch'
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Step3"
+              run: echo "This is Step 3"
