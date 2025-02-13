@@ -1,11 +1,13 @@
 name: "Deploy to EC2"
 
 on: 
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: "Setup Python"
         uses: actions/setup-python@v2
