@@ -17,11 +17,11 @@ jobs:
                 python-version: '3.x'
             - name: "Download Artifact"
               uses: actions/download-artifact@v4
-              with:
-                  name: SimpleApp
-                  run_id: ${{ github.event.workflow_run.id }}
-                  github_token: ${{ github.token }}
+              # with:
+              #     name: fastapiserver
+              #     run_id: ${{ github.event.workflow_run.id }}
+              #     github_token: ${{ github.token }}
             - name: "Echo Data"
               run: |
                     echo "Artifact downloaded"
-                    ls
+                    ls -l ./artifacts
