@@ -19,7 +19,7 @@ jobs:
               uses: actions/download-artifact@v4
               with:
                   name: fastapiserver
-                  run_id: ${{ github.run_id }}
+                  run_id: ${{ github.event.workflow_run.id }}
                   github_token: ${{ github.token }}
             - name: "Echo Data"
               run: |
